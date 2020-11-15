@@ -91,12 +91,6 @@ $gradient-radial: radial-gradient(#ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #1
 
 ## Models
 
-1. User (extends Django base User Model)
-    - username
-    - password
-    - email
-    - default_timer
-
 2. List
     - User (fkey)
     - Name
@@ -118,3 +112,8 @@ $gradient-radial: radial-gradient(#ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #1
 // by default, every user is the owner of the lists they create
 
 ## Resources
+
+## Default Superuser Details
+
+Username: `admin`
+Password: `abcd1234**`
