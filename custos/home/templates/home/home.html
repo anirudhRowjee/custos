@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content mx-auto my-auto">
+    <!-- Landing page + Signup form-->
+
+    <div class=' project-desc text-center m-5'>
+            <h1 class="display-4">Custos</h1>
+            <p class="lead">COVID-19 Protection Timer</p>
+            <p class="lead"> keep track of items that come from outside. No more confusion!</p>
+    </div>
+
+    <div class='onboarding mx-auto row col-sm'>
+
+        <div class='onboarding-item mx-auto  col-sm'>
+            <img src="{% static 'svg/onboarding-make-account.svg' %}" class='onboarding-item-image'>
+            <hr>
+            <div class='onboarding-item-text'>
+               Make An Account 
+            </div>
+        </div>
+        
+        <div class='onboarding-item mx-auto col-sm'>
+            <img class='onboarding-item-image' src="{% static 'svg/onboarding-add-item.svg' %}" >
+            <hr>
+            <div class='onboarding-item-text'>
+                Add items to track
+            </div>
+        </div>
+
+        <div class='onboarding-item mx-auto col-sm'>
+            <img class='onboarding-item-image' src="{% static 'svg/onboarding-get-notified.svg' %}" >
+            <hr>
+            <div class='onboarding-item-text'>
+                Get notified when an item can be touched!
+            </div>
+        </div>
+
+    </div>
+    
+    
+    
+    </div>
+
+
+    <div class='onboarding'>
+
+    </div>
+
+    <div class="about h-100 w-100">
+
+    </div>
+</div>
+
+{% endblock %}

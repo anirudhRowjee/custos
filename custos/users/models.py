@@ -3,14 +3,16 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from lists import models as list_models
+from users import models as user_models
 
 # Contains User Model Extension Layer (Profile) and Privilege Tables
 class Profile(models.Model):
     """
     Base class for the User Profile
     """
+    # one to one field to Django User model to extend it
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     bio = models.CharField(max_length=100)
 
     def __str__(self):
@@ -33,14 +35,21 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 
-"""
 class Privilege(models.Model):
     
-    Privilege table - change who can do what on each list for each user
-    
-    ROLE_CHOICES = []
+    """ Privilege table - change who can do what on each list for each user """
 
-    user_list = models.ForiegnKey('lists', on_delete= models.DO_NOTHING)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    # defining privileges
+    READER = "RD"
+    EDITOR = "ED"
+    OWNER = "OW"
     
-"""
+    ROLE_CHOICES = [
+        (READER, "READER"),
+        (EDITOR, "EDITOR"),
+        (OWNER, "OWNER")
+    ]
+
+    main_list = models.ForeignKey('lists.List', on_delete=models.CASCADE)
+    user = models.ForeignKey(user_models.Profile, on_delete=models.CASCADE)
+    role = models.CharField(max_length=2, choices=ROLE_CHOICES, default=OWNER)

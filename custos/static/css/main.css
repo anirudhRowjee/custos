@@ -1,0 +1,108 @@
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.bg-primary-c {
+    background-color: #2274a5;
+}
+
+
+
+.content-wrapper {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+h1{
+    color: #2274a5;
+}
+
+.main-content {
+    margin: 1em;
+    padding: 1em;
+}
+
+.navbar {
+    margin: 0.5em;
+    background-color: #2274a5;
+}
+
+.pageheader {
+    text-align: center;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+/*--------------------- LIST PAGE ------------------------*/
+.card {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.custom-card-deck {
+}
+
+.custom-card {
+    margin: 0.2em;
+    padding: 1em;
+}
+
+.list-header{
+    padding-bottom: 0.1em;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.list-header > h5 {
+    font-weight: bold;
+    color: #2274a5;
+}
+
+.list-header > .list-menu {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.list-content{
+    text-align: center;
+}
+
+.list-content-item {
+    margin: 0.5em;
+    padding: 0.5em;
+}
+
+
+
+.list-content-item > input {
+    background-color: white;
+}
+
+
+.list-content-item-name {
+    font-weight: bold;
+}
+
+.onboarding {
+    justify-content: center;
+    align-items: center;
+}
+
+.onboarding-item{
+    text-align: center;
+}
+
+.onboarding-item-image {
+    height: 30vh;
+    width: 30vh;
+}
+
+
+.project-desc {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin: 2em;
+}

@@ -26,8 +26,8 @@ You can also share your lists with other people and allow then to benefit from t
 
 ## Sitemap
 
-1. "/" Homepage (onboarding)
-2. "/signin" Login / Register
+1. "/" Homepage (onboarding, logged in users go straight to lists)
+2. "/login" Login / Register
 3. "/lists" (default once logged in) all lists
 4. "/me" settings page
 5. "/shared" lists shared with me

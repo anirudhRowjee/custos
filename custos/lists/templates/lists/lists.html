@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Lists {% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+        <h1 class='pageheader'> My Lists </h1>
+
+    <!-- action buttons -->
+    <nav class="nav nav-pills flex-column flex-sm-row">
+        <button class="btn bg-primary-c flex-sm-fill text-sm-center nav-link text-white"> 
+        <i class='fa fa-plus'> </i> Add New List 
+        </button>
+    </nav>
+
+    <br>
+
+    <!--Card Deck containing the lists of items-->
+    <div class="mt-3 custom-card-deck mx-auto ">
+
+
+        <div class='custom-card list shadow rounded '>
+            <div class='list-header'>
+                <!-- Name of List -->
+                <h5 class="my-auto">Name of the list.</h5>
+                <!-- Context Menu for List -->
+                <div class="list-menu btn-group dropleft">
+                    <button class="btn"  id="list-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i></button>
+                    <div class="dropdown-menu" aria-labelledby="list-menu-btn">
+                        <a class="dropdown-item" href="#"><i class="fa fa-plus m-1 p-1"></i>New Item</a>
+                        <a class="dropdown-item" href="#"><i class="fa fa-pencil m-1 p-1"></i>Edit Name</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#"><i class="fa fa-trash m-1 p-1"></i>Delete</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Items in list -->
+            <div class='list-content'>
+                <!-- individual item -->
+               <div class="input-group list-content-item">
+
+                    <div class='input-group-prepend'>
+                        <button class="btn btn-danger" type="button" > 23:59 </button>
+                    </div>
+                    <input type="text" readonly class="form-control form-control-plaintext" aria-label="Name of the Item" value='something bom bom bom' >
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary rounded" type="button"><i class="fa fa-pencil"></i></button>
+                    </div>
+                </div> 
+
+               <div class="input-group list-content-item">
+
+                    <div class='input-group-prepend'>
+                        <button class="btn btn-danger" type="button"> 00:03 </button>
+                    </div>
+                    
+                    <input  type="text" readonly class="form-control form-control-plaintext" aria-label="Name of the Item" value='something bom bom bom' >
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary rounded" type="button"><i class="fa fa-pencil"></i></button>
+                    </div>
+                </div> 
+
+               <div class="input-group list-content-item">
+
+                    <div class='input-group-prepend'>
+                        <button class="btn btn-success" type="button" > <i class='fa fa-check'></i>  </button>
+                    </div>
+                    <input   type="text" readonly class="form-control form-control-plaintext" aria-label="Name of the Item" value='something bom bom bom hehehehhehehehhee' >
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary rounded" type="button"><i class="fa fa-pencil"></i></button>
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 
     # custom apps
     'lists',
-    'users'
+    'users',
+    'home'
 
 ]
 
