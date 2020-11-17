@@ -9,6 +9,7 @@ urlpatterns = [
     path("users/", include("users.urls")),
     path("lists/", include("lists.urls")),
     path("", include("home.urls")),
-    # oauth urls
-    path("oauth", include("social_django.urls", namespace="social")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+handler404 = 'home.views.handler404'

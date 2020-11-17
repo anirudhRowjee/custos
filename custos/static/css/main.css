@@ -12,8 +12,7 @@
 
 
 .content-wrapper {
-    width: 100vw;
-    height: auto;
+    max-width: 100vw;
 }
 
 
@@ -31,10 +30,31 @@ h1{
     background-color: #2274a5;
 }
 
+.footer{
+    position: fixed;
+	bottom: 0;
+    width: 100%;
+    padding: 1em;
+    background-color: #141414ff;
+    color: white;
+    font-size: 1em;
+}
+
 .pageheader {
     text-align: center;
     margin-top: 0.5em;
     margin-bottom: 1em;
+}
+
+.link{
+    text-align: center;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    color: rgba(34, 116, 165, 0.8);
+}
+.link:hover{
+    color: rgba(34, 116, 165, 1);
+    text-decoration: none;
 }
 
 /*--------------------- LIST PAGE ------------------------*/
@@ -113,28 +133,3 @@ h1{
     margin: 0.5em;
 }
 
-.card-grid{
-    width: 100%;
-    display: flex;
-}
-
-.card-grid .card {
-    flex: 1;
-    margin-bottom: 2em;
-}
-
-@media (max-width: 1000px) {
-    .card-grid{
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    .card-grid{
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
