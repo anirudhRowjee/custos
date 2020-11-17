@@ -7,6 +7,8 @@ from . import models as list_models
 from .serializers import ItemSerializer
 from users import models as user_models
 
+import json
+
 
 def itemsview(request):
     # getting the logged in user
@@ -40,7 +42,8 @@ def items(request, id):
         # filter items to get only those which have the user
         items = list_models.Item.objects.all().filter(
             user_list__id=int(profile_object.id)
-        )
+        ).order_by('-created')
+
         print("Item list found")
 
         serialized = ItemSerializer(items, many=True).data
@@ -60,13 +63,17 @@ def items(request, id):
         # make a new item
 
         data = request.POST
-        print(request)
+
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        data = body['data']
+
 
         # data cleaning
         try:
             name = data.get("name")
-            time_delta = data.get("time")
-            user_id = data.get('user_id')
+            time_delta = int(data.get("time"))
+            user_id = int(data.get('user_id'))
             print(name, time_delta, user_id)   
         except MultiValueDictKeyError:
             # return JSON request - something wrong
@@ -75,13 +82,21 @@ def items(request, id):
         # making the new objects
         new_item = list_models.Item(name=name, delta=time_delta)
 
+        new_item.save()
+
         # user profile to add to the list
         user_object = User.objects.get(id = user_id)
-        profile = user_models.Profile.objects.all().filter(user__id = user_id)[0]
+
+        profile = user_models.Profile.objects.get(user = user_object)
+
+        print(profile.user.id)
+
         new_item.user_list.add(profile)
 
         # this calls the signal which makes the timestamp delta work
         new_item.save()
+
+        return JsonResponse({'status': 200, 'message': "Created Successfully."})
 
     elif request.method == "PUT":
         # update the current item

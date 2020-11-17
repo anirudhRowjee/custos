@@ -13,6 +13,7 @@
 
 .content-wrapper {
     max-width: 100vw;
+    min-width: 120vh;
 }
 
 

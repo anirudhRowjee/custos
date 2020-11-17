@@ -39,7 +39,7 @@ My Account
                         </button>
 
                     </div>
-                    <form action="" method="POST" class="modal-body">
+                    <form v-on:submit.prevent="editAccountForm" method="POST" class="modal-body">
                         <label for="username">Username</label>
                         <input type="text" class="form-control mb-3" id="username" value="{{profile.user.username}}">
                         
@@ -65,10 +65,37 @@ My Account
 {% endblock %}
 
 {% block vue %}
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var url = "{% url 'myaccount' %}";
+    const user_id = '{{ user.id }}';
+    console.log(user_id);
+
+    axios.defaults.xsrfCookieName = 'csrftoken'
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+</script>
+
+
+{% verbatim %}
 <script>    
 
     // don't forget to change delimiters to square brackets
-    var modal = new Vue({
+    var account = new Vue({
         el: "#accountModal",
         methods:{
             editAccountForm : function(e){
@@ -79,20 +106,26 @@ My Account
                 var bio = e.target['bio'].value;
                 var email = e.target['email'].value;
 
-                /*axios.post("http://127.0.0.1:8000"+url, {
-                    headers : { 
-                        "X-CSRFTOKEN" : csrf_token,
-                        'Content-Type': 'application/json'
+                // axios post request to send  data
+                axios.post("http://localhost:8000"+url, {
+                    headers: {
+                        "X-CSRFToken": getCookie('csrftoken'),
                     },
                     data: {
-                        "name" : itemname,
-                        "time": delta
+                        "username" : username,
+                        "bio": bio,
+                        "email": email,
+                        "user_id": user_id
                     }
-                })*/
+                })
 
+                // reload page
+                location.reload()
             }
         }
     })
 
 </script>
+
+{% endverbatim %}
 {% endblock %}
