@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Lists {% endblock %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="container text-center">
+        <h1 class="display-1">404</h1>
+        <p class="lead">This page doesnt exist.</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'home' %}">Return to home page.</a>
+        {% else %}
+        <a href="{% url 'login' %}">Return to login/signup page.</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+

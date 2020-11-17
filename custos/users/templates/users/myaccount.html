@@ -11,23 +11,53 @@ My Account
     <h1 class='pageheader'> My Account </h1>
 
     <div class="account custom-card shadow rounded mx-auto container p-5">
+        <!-- Displaying details of user -->
         <div class="mydetails">
             <label for="username">Username</label>
-            <input type="text" class="form-control mb-3" id="username" value="Username_123" disabled>
+            <input type="text" class="form-control mb-3" id="username" value="{{profile.user.username}}" disabled>
             
             <label for="bio">Bio</label>
-            <input type="textbox" class="form-control mb-3" id="bio" value="Bio comes here. This is the bio." disabled>
+            <input type="textbox" class="form-control mb-3" id="bio" value="{{profile.bio}}" disabled>
 
             <label for="email">Email</label>
-            <input type="email" class="form-control mb-3" id="email" value="johndoe@lolmail.com" disabled>
+            <input type="email" class="form-control mb-3" id="email" value="{{profile.user.email}}" disabled>
+            
+            <!-- Edit User modal -->
 
-            <button class="btn btn-outline-success w-100">Edit</button>
+            <!-- Button trigger modal -->
+            <button class="btn btn-outline-success w-100" data-toggle="modal" data-target="#accountModal">Edit</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="modelLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modelLabel">Edit User</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <form action="" method="POST" class="modal-body">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control mb-3" id="username" value="{{profile.user.username}}">
+                        
+                        <label for="bio">Bio</label>
+                        <input type="textbox" class="form-control mb-3" id="bio" value="{{profile.bio}}">
+
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control mb-3" id="email" value="{{profile.user.email}}">
+                        <button type="submit" class="btn btn-outline-success w-100">Save</button>
+                    </form>
+                </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
-    <div class="footer">
-
-    </div>
     
 </div>
 
@@ -37,10 +67,32 @@ My Account
 {% block vue %}
 <script>    
 
-// don't forget to change delimiters to square brackets
-var app = new Vue({
+    // don't forget to change delimiters to square brackets
+    var modal = new Vue({
+        el: "#accountModal",
+        methods:{
+            editAccountForm : function(e){
+                // function to add item
 
-})
+                // getting the form values
+                var username = e.target['username'].value;
+                var bio = e.target['bio'].value;
+                var email = e.target['email'].value;
+
+                /*axios.post("http://127.0.0.1:8000"+url, {
+                    headers : { 
+                        "X-CSRFTOKEN" : csrf_token,
+                        'Content-Type': 'application/json'
+                    },
+                    data: {
+                        "name" : itemname,
+                        "time": delta
+                    }
+                })*/
+
+            }
+        }
+    })
 
 </script>
 {% endblock %}

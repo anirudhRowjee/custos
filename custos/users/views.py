@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
 
 # importing models
-
+from . import models
 
 def loginview(request):
     """
@@ -35,12 +36,16 @@ def loginview(request):
     else:
         if request.user.is_authenticated:
             # render home page
-            pass
+            return redirect('home')
         return render(request,'users/login.html')
 
 def logoutview(request):
+    """
+    logs out user
+    """
     logout(request)
     return redirect('login')
+
 
 def registerview(request):
     """
@@ -63,7 +68,7 @@ def registerview(request):
             password_hashed = make_password(password)
 
             # register user
-            user = User(username=username, password=password_hashed)
+            user = User(username=username, password=password_hashed, email=email)
             user.save()
 
             # do the actual login
@@ -75,4 +80,18 @@ def registerview(request):
         return render(request,'404.html')
 
 def myaccount(request):
-    return render(request, 'users/myaccount.html')
+    if request.method == "GET":
+
+        # get the user from request
+        uid = request.user.id
+        if not uid:
+            return JsonResponse(
+                {"error": 400, "message": "Please Login to Access this Data"}
+            )
+
+        user_profile = models.Profile.objects.get(id=uid)
+
+        if not user_profile:
+            return JsonResponse({"error": 400, "message": "user does not exist"})
+        
+        return render(request, 'users/myaccount.html', {'profile': user_profile})

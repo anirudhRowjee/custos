@@ -18,9 +18,8 @@ def itemsview(request):
 
 # API View Section
 def items(request, id):
-
     if request.method == "GET":
-
+        print(request.POST)
         # serialize all the items that the user owns
         uid = request.user.id
         if not uid:
@@ -59,13 +58,16 @@ def items(request, id):
         3. Image? (Maybe)
         """
         # make a new item
+
         data = request.POST
-        user_id = int(request.user.id)
+        print(request)
 
         # data cleaning
         try:
             name = data.get("name")
             time_delta = data.get("time")
+            user_id = data.get('user_id')
+            print(name, time_delta, user_id)   
         except MultiValueDictKeyError:
             # return JSON request - something wrong
             return JsonResponse({"status": 400, "error": "Incomplete Request Body"})
@@ -74,7 +76,8 @@ def items(request, id):
         new_item = list_models.Item(name=name, delta=time_delta)
 
         # user profile to add to the list
-        profile = user_models.Profile.objects.get(user.id == user_id)
+        user_object = User.objects.get(id = user_id)
+        profile = user_models.Profile.objects.all().filter(user__id = user_id)[0]
         new_item.user_list.add(profile)
 
         # this calls the signal which makes the timestamp delta work
