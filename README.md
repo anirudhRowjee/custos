@@ -1,133 +1,26 @@
-# Devspot WEBATHON
+# Custos - Keep track of things you get from outside
 
-## Judgement Criteria
+Ever ordered a bunch of things from outside, let them sit in the garage/under the stairs for what was supposed to be 24 hours, and then forgotten about them for a week? 
 
-1. Uniqueness(Ingenuity) - x Points
-2. Practical usecase(Impact) - x Points
-3. User Experience(Working MVP) - x Points
-4. Code quality & scalability - x Points
-5. User Interface - x Points
-6. Presentation - x Points
+Or have you ever picked something up thinking it's been there for days, only to realize that it's just been an hour?
 
-## Idea
+You're not alone 😆. All of us have faced this problem, so we decided to do something about it.
 
-A tool to tell you when you can use the things that you get from outside.
+Team Mars Aeternum Proudly Presents, Custos.
 
-For example, if you order something from Amazon, and get it to your house, and you need to wait 24 hours before touching it, it's a pain to manually remember (especially for a large number of items) when it's safe to touch different things, and by extension, when it's safe to user them. If you use our solution, you will not need to rememeber anything, as the app will take care of that for you, all while allowing you to see which items are past the time limit (making them safe to use).
+## Custos lets you know when you can touch something.
 
-You can also share your lists with other people and allow then to benefit from the timing.
+We keep track of the time that you add an item, and suggest some recommended waiting times for you - you're free to choose your own.
 
-## Main Features
+## Find out when the timer elapses
 
-1. Keep track of things that you get from outside
-2. Set timers to see when the things are safe to use
-3. Add family members/ roommates to view the timers, add new things
-4. Change status of products which are yet to arrive with the arrival date to keep track of everything (?)
+the timer will become "SAFE" when it elapses.
 
-## Sitemap
 
-1. "/" Homepage (onboarding, logged in users go straight to lists)
-2. "/login" Login / Register
-3. "/lists" (default once logged in) all lists
-4. "/me" settings page
-5. "/shared" lists shared with me
+# Stack
+1. Django, Django REST Framework (HTML, CSS)
+2. Vue (Javascript)
+3. Bootstrap (CSS)
 
-## Architecture
 
-1. Django
-2. Third-Party Auth Packages for Django (django-socialauth, etc)
-3. React in Django Templates
-4. Bootstrap
 
-## Colorscheme
-
-```css
-/* CSS HEX */
---white: #ffffffff;
---star-command-blue: #2274a5ff;
---blush: #ea638cff;
---orange: #f77f00ff;
---eerie-black: #141414ff;
-
-/* CSS HSL */
---white: hsla(0, 0%, 100%, 1);
---star-command-blue: hsla(202, 66%, 39%, 1);
---blush: hsla(342, 76%, 65%, 1);
---orange: hsla(31, 100%, 48%, 1);
---eerie-black: hsla(0, 0%, 8%, 1);
-
-/* SCSS HEX */
-$white: #ffffffff;
-$star-command-blue: #2274a5ff;
-$blush: #ea638cff;
-$orange: #f77f00ff;
-$eerie-black: #141414ff;
-
-/* SCSS HSL */
-$white: hsla(0, 0%, 100%, 1);
-$star-command-blue: hsla(202, 66%, 39%, 1);
-$blush: hsla(342, 76%, 65%, 1);
-$orange: hsla(31, 100%, 48%, 1);
-$eerie-black: hsla(0, 0%, 8%, 1);
-
-/* SCSS RGB */
-$white: rgba(255, 255, 255, 1);
-$star-command-blue: rgba(34, 116, 165, 1);
-$blush: rgba(234, 99, 140, 1);
-$orange: rgba(247, 127, 0, 1);
-$eerie-black: rgba(20, 20, 20, 1);
-
-/* SCSS Gradient */
-$gradient-top: linear-gradient(0deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-right: linear-gradient(90deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-bottom: linear-gradient(180deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-left: linear-gradient(270deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-top-right: linear-gradient(45deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-bottom-right: linear-gradient(135deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-top-left: linear-gradient(225deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-bottom-left: linear-gradient(315deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-$gradient-radial: radial-gradient(#ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-```
-
-## Models
-
-2. List
-    - User (fkey)
-    - Name
-    - Created Timestamp
-
-3. Item
-    - User (fkey)
-    - List (fkey)
-    - Name
-    - added_timestamp
-    - expected_elapsed_timestamp
-    - Expired (boolean flag, done or not)
-
-4. PrivilegeTable (Decides who can see what)
-    - List (fkey)
-    - User (fkey)
-    - role (One of 3 - Editor, Consumer and Owner)
-
-// by default, every user is the owner of the lists they create
-
-## Resources
-
-## Default Superuser Details
-
-Username: `admin`
-Password: `abcd1234**`
-
-## basic Vue template 
-(goes inside `{% block vue %} {% endblock %}`)
-```js
-<script>
-var app = new Vue({
-    el: "#test",
-    delimiters: ['[[',']]'],
-    data: {
-        message: "hello world"
-    },
-})
-</script>
-```
