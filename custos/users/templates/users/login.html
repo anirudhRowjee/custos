@@ -1,0 +1,92 @@
+{% extends 'base.html' %} 
+
+{% block title %}
+| Login
+{% endblock  %}
+
+{% block content %}
+<div class="main-content">
+    {% if message %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="row">
+        <!--Form for login-->
+        <div class="login col-md m-3">
+
+            <form action="/users/login" method="post" class="card p-4">
+
+                {% csrf_token %}
+
+                <h2 class="card-title text-center">Login </h2>
+
+                <div class="form-label-group">
+                    <label for="">username</label>
+                    <input type="text" name="username" id="" class="form-control">
+                </div>
+
+                <div class="form-label-group">
+                    <label for="">password</label>
+                    <input type="password" name="password" id="" class="form-control">
+                </div>
+                
+                <button type="submit" class="btn btn-success m-3">Login</button>
+
+            </form>
+
+        </div>
+
+        <!--Form for signup-->
+        <div class="signup col-md m-3">
+
+            <form action="/users/register" method="post" class="card p-4">
+
+                {% csrf_token %}
+
+                <h2 class="card-title text-center">Signup for Custos</h2>
+
+                <div class="form-label-group mb-3">
+                    <label for="">username</label>
+                    <input type="text" name="username" id="" class="form-control" required>
+                </div>
+
+                <div class="form-label-group mb-3">
+                    <label for="">email</label>
+                    <input type="text" name="email" id="" class="form-control" required>
+                </div>
+                
+                <div class="form-label-group mb-3">
+                    <label for="">password</label>
+                    <input type="password" name="password" id="" class="form-control" required>
+                </div>
+
+                <div class="form-label-group mb-3">
+                    <label for="">password (again)</label>
+                    <input type="password" name="password_repeat" id="" class="form-control" required>
+                </div>
+
+                <button type="submit" class="btn btn-success m-3">Sign Up for Custos</button>
+                
+            </form>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block vue %}
+<script>
+var app = new Vue({
+    el: "#test",
+    delimiters: ['[[',']]'],
+    data: {
+        message: "hello world"
+    },
+})
+</script>
+{% endblock  %}

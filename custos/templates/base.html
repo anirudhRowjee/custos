@@ -25,15 +25,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+
+        {% if user.is_authenticated %}
         <li class="nav-item active">
           <a class="nav-link" href="#"><i class="fa fa-home m-1 p-1"></i>Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-list-ul m-1 p-1"></i>Shared Lists</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#"><i class="fa fa-user-circle m-1 p-1"></i>My Account</a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><i class="fas fa-door-open m-1 p-1"></i> Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><i class="fa fa-home m-1 p-1"></i>Login/Signup <span class="sr-only">(current)</span></a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </nav>
@@ -45,11 +52,18 @@
     {% endblock %}
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- there will be script tags inside this block -->
     {% block vue %}
     {% endblock %}
 
   </div>
 
+
+  {% block footer %}
+    <div class="footer mb-0">
+      Footer Comes Here
+    </div>
+  {% endblock %}
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

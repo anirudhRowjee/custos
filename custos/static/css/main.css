@@ -1,5 +1,8 @@
 * {
     font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .bg-primary-c {
@@ -10,7 +13,7 @@
 
 .content-wrapper {
     width: 100vw;
-    height: 100vh;
+    height: auto;
 }
 
 
@@ -44,8 +47,6 @@ h1{
 }
 
 .custom-card {
-    margin: 0.2em;
-    padding: 1em;
 }
 
 .list-header{
@@ -70,8 +71,8 @@ h1{
 }
 
 .list-content-item {
-    margin: 0.5em;
-    padding: 0.5em;
+    margin: 0.1em;
+    margin-bottom: 0.5em;
 }
 
 
@@ -95,8 +96,8 @@ h1{
 }
 
 .onboarding-item-image {
-    height: 30vh;
-    width: 30vh;
+    height: 20vh;
+    width: 20vh;
 }
 
 
@@ -105,4 +106,35 @@ h1{
     margin-top: 1em;
     margin-bottom: 1em;
     margin: 2em;
+}
+
+.extra-info {
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
+.card-grid{
+    width: 100%;
+    display: flex;
+}
+
+.card-grid .card {
+    flex: 1;
+    margin-bottom: 2em;
+}
+
+@media (max-width: 1000px) {
+    .card-grid{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card-grid{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
