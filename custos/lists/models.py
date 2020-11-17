@@ -39,7 +39,7 @@ class Item(models.Model):
 
     def __str__(self):
         # string representation
-        return f"{self.name} - {str(self.user_list)}"
+        return f"{self.name}"
 
 
 @receiver(post_save, sender=Item)

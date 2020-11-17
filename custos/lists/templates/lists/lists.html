@@ -12,7 +12,13 @@
     <h1 class='pageheader'> My List </h1>
 
     <!-- Add Item modal -->
-    <div class="container">
+    <div 
+        class="container" 
+        id='evt-master'
+        @refresh='handleRefreshItemList()'
+    >
+
+
         <!-- Button trigger modal -->
         <button class="btn bg-primary-c text-white w-100" data-toggle="modal" data-target="#additemModal"> 
             <i class='fa fa-plus'> </i> Add New Item
@@ -31,83 +37,176 @@
                     </button>
 
                 </div>
+                <!-- Material Index -->
                 <form v-on:submit.prevent="addItemForm" method="POST" class="modal-body">
                     <label for="itemname">Item Name</label>
                     <input type="text" class="form-control mb-3" name="itemname" id="itemname" required>
-                    <label for="time">How long do you wish to quarantine?</label>
-                    <input type="datetime-local" class="form-control mb-3" name="delta" id="time" required>
+                    <label for="time">Enter number of hours</label>
+                    <input type="number" class="form-control mb-3" name="delta" id="time" required>
+                    <div class="row text-center">
+
+                        <div class="col mb-3">
+                            <div class="card bg-dark text-white">
+                                <div class="card-header">
+                                    Metal
+                                </div>
+                                <div class="card-body">
+                                    120 Hours
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="col mb-3">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-header">
+                                    Wood
+                                </div>
+                                <div class="card-body">
+                                    96 Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card bg-light text-dark">
+                                <div class="card-header">
+                                    Plastic
+                                </div>
+                                <div class="card-body">
+                                    96 Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card bg-secondary text-white">
+                                <div class="card-header">
+                                    Steel
+                                </div>
+                                <div class="card-body">
+                                    48 Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card bg-dark text-white">
+                                <div class="card-header">
+                                    Aluminium
+                                </div>
+                                <div class="card-body">
+                                    8 Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-header">
+                                    Cardboard
+                                </div>
+                                <div class="card-body">
+                                    24 Hours
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-3">
+                            <div class="card bg-light text-dark">
+                                <div class="card-header">
+                                    Paper
+                                </div>
+                                <div class="card-body">
+                                    24 Hours
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-outline-success w-100">Add</button>
                 </form>
             </div>
             </div>
         </div>
+
+        
+
+
     </div>
 
-    <br>
+        <!--Card Deck containing the lists of items-->
+        <div class="mt-3 custom-card-deck mx-auto border-black" id="item-deck">
 
-    <!--Card Deck containing the lists of items-->
-    <div class="mt-3 custom-card-deck mx-auto" id="item-deck">
+            <list-item
+                v-for='item in itemlist_clean'
+                v-bind:item='item'
+                v-bind:key='item.id'
+                inline-template
+            >
+                {% verbatim %}
+                    <div class='custom-card list '>
+                        <!-- Items in list -->
+                        <div class='list-content'>
+                            <!-- individual item -->
+            
+                        <div class="list-content-item">
+                                <div class='input-group'>
 
-        <list-item
-            v-for='item in itemsList'
-            v-bind:item='item'
-            v-bind:key='item.id'
-            inline-template
-        >
-            {% verbatim %}
-                <div class='custom-card list '>
+                                    <div class='input-group-prepend'>
+                                        <button class="btn btn-primary bg-primary-c" type="button" > 
+                                            <!-- countdown timer --> 
+                                            <countdown v-if='item.current_delta > 0' :time="item.current_delta * 1000">
+                                                <template slot-scope="props">
+                                                <span v-if='props.days'> {{props.days}}d  </span>
+                                                <span v-if='props.hours'> {{props.hours}}h  </span>
+                                                <span v-if='props.minutes'> {{props.minutes}}m  </span>
+                                                </template>
+                                            </countdown>
+                                            <span v-else>
+                                                SAFE!
+                                            </span>
+                                        </button>
+                                    </div>
 
-                    <!-- Items in list -->
-                    <div class='list-content'>
-                        <!-- individual item -->
-        
-                    <div class="list-content-item">
-                            <div class='input-group'>
-                                <div class='input-group-prepend'>
-                                    <button class="btn btn-danger" type="button" > {{item.delta}} </button>
+                                    <input type="text" readonly class="form-control form-control-plaintext" aria-label="Name of the Item" v-bind:value='item.name'>
+            
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" data-toggle="collapse" v-bind:data-target="'#itemno'+item.id">
+                                            <i class='fa fa-chevron-circle-down'></i>
+                                        </button>
+                                    </div>
                                 </div>
-                                <input type="text" readonly class="form-control form-control-plaintext" aria-label="Name of the Item" v-bind:value='item.name'>
-        
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary" type="button" data-toggle="collapse" v-bind:data-target="'#itemno'+item.id">
-                                        <i class='fa fa-chevron-circle-down'></i>
-                                    </button>
+                                <!-- collapsible for more information -->
+                                <div class='extra-info collapse rounded border-botton-dark' v-bind:id="'itemno'+item.id">
+            
+                                    <div class='extra-info-time'> 
+                                        <!-- time it came in and date-->
+                                        <div class="mb-2">
+                                            Arrival: {{item.created_clean}}
+                                        </div>
+                                        <br/>
+                                        <div class="mb-2">
+                                            Safe By: {{item.expected_clean}}
+                                        </div>
+                                        
+                                    </div>
+            
+                                    <div class='extra-info-image'> 
+                                        <!-- Image, if Any -->
+                                    </div>
+            
+                                    <div class='extra-info-shared-people'>
+                                        <!-- People this item was shared with -->
+                                    </div>
+            
                                 </div>
-                            </div>
-                            <!-- collapsible for more information -->
-                            <div class='extra-info collapse rounded border-botton-dark' v-bind:id="'itemno'+item.id">
-        
-                                <div class='extra-info-time'> 
-                                    <!-- time it came in and date-->
-                                    Arrival: {{item.created}}
-                                    <br/>
-                                    Safe By: {{item.expected_elapsed_timestamp}}
-                                </div>
-        
-                                <div class='extra-info-image'> 
-                                    <!-- Image, if Any -->
-                                </div>
-        
-                                <div class='extra-info-shared-people'>
-                                    <!-- People this item was shared with -->
-                                </div>
-        
-                            </div>
-        
-                        </div> 
-        
+            
+                            </div> 
+            
+                        </div>
                     </div>
-                </div>
-            {% endverbatim %}
-        </list-item>
-        
+                {% endverbatim %}
+            </list-item>
+        </div>
 
-        
-        
-    </div>
-{% else %}
-    <h1 class='pageheader'> Please Login to View this Page. </h1>
-{% endif %}
+    {% else %}
+        <h1 class='pageheader'> Please Login to View this Page. </h1>
+    {% endif %}
+
 
 {% endblock %}
 
@@ -135,13 +234,23 @@ var url = "{% url 'useritems' id=user.id %}";
 const user_id = '{{ user.id }}';
 console.log(user_id);
 
+// global state
+var itemsListGlobal = []
+// setter
+function setItemsListGlobal(to_list){
+    itemsListGlobal = [...to_list];
+}
+
+
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 </script>
 
 {% verbatim %} 
 <script>
-    
+
+    // app to handle cross-state reactivity
+
     // Vue component to display the item
     Vue.component('list-item', {
         props: ['item'],
@@ -152,19 +261,51 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 
         el: "#item-deck",
         data: {
-            itemsList:[],
+            itemlist: [],
+            itemlist_clean: [],
+        },
+        methods: {
+            fetchItems: function(){
+                // fetch method
+                axios
+                .get("http://localhost:8000"+url)
+                .then(response => {
+                    // set global state
+                    this.itemlist = response.data
+                    this.itemlist_clean = this.itemlist.map(item => {
+                        var temp = {...item};
+                        temp.created_clean = this.formatTimestamp(item.created)
+                        temp.expected_clean = this.formatTimestamp(item.expected_elapsed_timestamp)
+
+
+                        // calculate delta wrt current time, in seconds
+                        expires = new Date(item.expected_elapsed_timestamp)
+                        now = new Date();
+                        
+                        diff = Math.floor((expires.getTime() - now.getTime()) /1000 );
+                        
+
+                        temp.current_delta = diff;
+
+                        return temp;
+                    })
+                    console.log(this.itemlist_clean)
+                    })
+
+                .catch(error => console.log(error))
+            },
+
+            formatTimestamp: function(datestring){
+                // format the API-sent datetime into a proper, human-readable
+                // time string
+                var td = new Date(datestring);
+                return td.toLocaleString();
+            }
         },
         // Once component is mounted it calls the Items API (Django) to fetch the users items
         mounted() {
-            axios
-                .get("http://localhost:8000"+url)
-                .then(response => {
-                    console.log(response);
-                    this.itemsList = response.data;
-                    })
-                .catch(error => console.log(error))
+            this.fetchItems();
         }
-
     });
 
     var modal = new Vue({
@@ -175,13 +316,12 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 
                 // getting the form values
                 var itemname = e.target['itemname'].value;
-                var datetime = new Date(e.target['time'].value);
+                var hours = e.target['time'].value;
 
-                // getting the current date
-                var current_date = new Date();
+                
+                // convert to seconds
+                var seconds_delta = hours * 3600;
 
-                // time delta in seconds
-                var delta = Math.floor((datetime.getTime() - current_date.getTime())/1000);
 
                 // axios post request to send item data
                 axios.post("http://localhost:8000"+url, {
@@ -190,12 +330,15 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
                     },
                     data: {
                         "name" : itemname,
-                        "time": delta,
+                        "time": seconds_delta,
                         "user_id": user_id
                     }
                 })
 
-            }
+                this.$emit('refresh');
+                // re-render the list component
+                location.reload()
+            }  
         }
     })
 

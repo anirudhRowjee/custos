@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.datastructures import MultiValueDictKeyError
+import json
+
 
 # importing models
 from . import models
@@ -79,6 +83,7 @@ def registerview(request):
     else:
         return render(request,'404.html')
 
+
 def myaccount(request):
     if request.method == "GET":
 
@@ -95,3 +100,29 @@ def myaccount(request):
             return JsonResponse({"error": 400, "message": "user does not exist"})
         
         return render(request, 'users/myaccount.html', {'profile': user_profile})
+    elif request.method == "POST":
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        data = body['data']
+
+        try:
+            # new user details
+            username = data.get("username")
+            bio = data.get("bio")
+            email = data.get('email')
+            user_id = int(data.get('user_id'))
+        except MultiValueDictKeyError:
+            # return JSON request - something wrong
+            return JsonResponse({"status": 400, "error": "Incomplete Request Body"})
+        
+        user = User.objects.get(id=user_id)
+        user_profile = models.Profile.objects.get(user=user)
+
+        user.username = username
+        user.email = email
+        user_profile.bio = bio
+
+        user.save()
+        user_profile.save()
+
+        return redirect('myaccount')
