@@ -8,54 +8,135 @@ Home
 {% block content %}
 
 <div class="main-content mx-auto my-auto">
+
     <!-- Landing page + Signup form-->
 
-    <div class=' project-desc text-center m-5'>
+    <div class='project-desc text-center m-5'>
             <h1 class="display-4">Custos</h1>
             <p class="lead">COVID-19 Protection Timer</p>
             <p class="lead"> keep track of items that come from outside. No more confusion!</p>
     </div>
+    <div class="info-item m-5">
+        <h1 class="pageheader">Why would I need this?</h1>
+        <div class="lead p-2 text-justify">
+            The outbreak of new (novel coronavirus SARS-CoV-2) virulent strains are continuously infecting the people worldwide, 
+            resulting in the pandemic known as COVID-19 Virus contact through contaminated surfaces are the main reason for the 
+            spread and transmission of human coronaviruses. 
+        </div>
+        <br/>
+        <div class="lead p-2 text-justify">
+            The length in the persistence of novel coronavirus SARS-CoV-2 is 
+            different for different range of nonbiocidal surface materials. The risk can be increased when individuals have 
+            continuous or close contact with these contaminated items.
+        </div>
+        <br/>
+        
+    </div>
 
+    <h1 class="pageheader">How do I start?</h1>
     <div class='onboarding mx-auto row col-sm'>
 
-        <div class='onboarding-item mx-auto  col-sm'>
+        <div class='onboarding-item mx-auto col-sm'>
             <img src="{% static 'svg/onboarding-make-account.svg' %}" class='onboarding-item-image'>
-            <hr>
-            <div class='onboarding-item-text'>
+            <div class='onboarding-item-text mt-3'>
                Make An Account 
             </div>
+            <hr>
         </div>
         
         <div class='onboarding-item mx-auto col-sm'>
             <img class='onboarding-item-image' src="{% static 'svg/onboarding-add-item.svg' %}" >
-            <hr>
-            <div class='onboarding-item-text'>
+            <div class='onboarding-item-text mt-3'>
                 Add items to track
             </div>
+            <hr>
         </div>
 
         <div class='onboarding-item mx-auto col-sm'>
             <img class='onboarding-item-image' src="{% static 'svg/onboarding-get-notified.svg' %}" >
-            <hr>
-            <div class='onboarding-item-text'>
+            <div class='onboarding-item-text mt-3'>
                 Get notified when an item can be touched!
             </div>
+            <hr>
         </div>
-
     </div>
     
+        
+
+    <div class="info-item m-5">
+        <h1 class="pageheader">Timing for different surfaces</h1>
+        <div class="card-grid text-center">
+
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    Metal
+                </div>
+                <div class="card-body">
+                    5 Days
+                </div>
+            </div>
+
+            <div class="card bg-warning text-dark">
+                <div class="card-header">
+                    Wood
+                </div>
+                <div class="card-body">
+                    4 Days
+                </div>
+            </div>
+
+            <div class="card bg-light text-dark">
+                <div class="card-header">
+                    Plastic
+                </div>
+                <div class="card-body">
+                    4 Days
+                </div>
+            </div>
+
+            <div class="card bg-secondary text-white">
+                <div class="card-header">
+                    Stainless Steel
+                </div>
+                <div class="card-body">
+                    2 Days
+                </div>
+            </div>
+            
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    Aluminium
+                </div>
+                <div class="card-body">
+                    8 Hours
+                </div>
+            </div>
+
+            <div class="card bg-warning text-dark">
+                <div class="card-header">
+                    Cardboard
+                </div>
+                <div class="card-body">
+                    24 Hours
+                </div>
+            </div>
+
+            <div class="card bg-light text-dark">
+                <div class="card-header">
+                    Paper
+                </div>
+                <div class="card-body">
+                    24 Hours
+                </div>
+            </div>
+        </div>
+        <br>            
+    </div>
+        
+
     
     
-    </div>
-
-
-    <div class='onboarding'>
-
-    </div>
-
-    <div class="about h-100 w-100">
-
-    </div>
 </div>
+
 
 {% endblock %}

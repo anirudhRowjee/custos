@@ -41,7 +41,7 @@ You can also share your lists with other people and allow then to benefit from t
 
 ## Colorscheme
 
-css
+```css
 /* CSS HEX */
 --white: #ffffffff;
 --star-command-blue: #2274a5ff;
@@ -87,7 +87,7 @@ $gradient-bottom-right: linear-gradient(135deg, #ffffffff, #2274a5ff, #ea638cff,
 $gradient-top-left: linear-gradient(225deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
 $gradient-bottom-left: linear-gradient(315deg, #ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
 $gradient-radial: radial-gradient(#ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #141414ff);
-
+```
 
 ## Models
 
@@ -117,3 +117,17 @@ $gradient-radial: radial-gradient(#ffffffff, #2274a5ff, #ea638cff, #f77f00ff, #1
 
 Username: `admin`
 Password: `abcd1234**`
+
+## basic Vue template 
+(goes inside `{% block vue %} {% endblock %}`)
+```js
+<script>
+var app = new Vue({
+    el: "#test",
+    delimiters: ['[[',']]'],
+    data: {
+        message: "hello world"
+    },
+})
+</script>
+```

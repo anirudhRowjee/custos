@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}
+My Account
+{% endblock %}
+
+{% block content %}
+
+<div class="main-content mx-auto my-auto">
+    <h1 class='pageheader'> My Account </h1>
+
+    <div class="account custom-card shadow rounded mx-auto container p-5">
+        <div class="mydetails">
+            <label for="username">Username</label>
+            <input type="text" class="form-control mb-3" id="username" value="Username_123" disabled>
+            
+            <label for="bio">Bio</label>
+            <input type="textbox" class="form-control mb-3" id="bio" value="Bio comes here. This is the bio." disabled>
+
+            <label for="email">Email</label>
+            <input type="email" class="form-control mb-3" id="email" value="johndoe@lolmail.com" disabled>
+
+            <button class="btn btn-outline-success w-100">Edit</button>
+        </div>
+    </div>
+
+    <div class="footer">
+
+    </div>
+    
+</div>
+
+
+{% endblock %}
+
+{% block vue %}
+<script>    
+
+// don't forget to change delimiters to square brackets
+var app = new Vue({
+
+})
+
+</script>
+{% endblock %}
